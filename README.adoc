@@ -1,0 +1,139 @@
+# Conversando sobre Java Collections Framework
+
+
+
+== Parte01
+
+[source,java]
+----
+package io.github.dearrudam.falandodecollections;
+
+import java.util.*;
+
+public class Parte01 {
+
+    public static void main(String[] args) {
+
+        int num1=1;
+        int num2=2;
+        int num3=3;
+        int[] numeros2 = new int[]{num1,num2};
+//         0, 1
+//        [1, 2]
+        System.out.println("numeros = " + Arrays.toString(numeros2));
+
+
+        Collection listaDeNumeros = new ArrayList();
+        listaDeNumeros.add(num1);
+        listaDeNumeros.add(num2);
+        listaDeNumeros.add(num3);
+        listaDeNumeros.add(num3);
+
+        System.out.println("numeros utilizando list = " + listaDeNumeros.toString());
+
+        Collection listaDeNumeros2 = new HashSet();
+        listaDeNumeros2.add(num1);
+        listaDeNumeros2.add(num2);
+        listaDeNumeros2.add(num3);
+        listaDeNumeros2.add(num3);
+        System.out.println("numeros utilizando set = " + listaDeNumeros2.toString());
+
+
+
+    }
+
+}
+
+----
+
+== Parte02
+
+[source,java]
+----
+package io.github.dearrudam.falandodecollections;
+
+import java.util.ArrayList;
+
+public class Parte02 {
+    public static void main(String[] args) {
+        // List
+
+        ArrayList list=new ArrayList<>(10);
+    list.add(1);
+    list.add(2);
+    list.add(3);
+    list.get(3);
+        System.out.println(list);
+    }
+}
+
+----
+
+== Parte03
+
+[source,java]
+----
+package io.github.dearrudam.falandodecollections;
+
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
+
+public class Parte03 {
+
+    public static void main(String[] args) {
+        // Set
+
+        Set<Desenvolvedor> desenvolvedores = new LinkedHashSet<>();
+
+        Desenvolvedor ale = new Desenvolvedor("Ale");
+        Desenvolvedor max = new Desenvolvedor("Max");
+        Desenvolvedor aynelorr = new Desenvolvedor("aynelorr");
+        Desenvolvedor rafael = new Desenvolvedor("Rafael");
+
+        desenvolvedores.add(rafael);
+        desenvolvedores.add(max);
+        desenvolvedores.add(ale);
+        desenvolvedores.add(aynelorr);
+        desenvolvedores.add(new DesenvolvedorJava("aynelorr"));
+
+        System.out.println(desenvolvedores);
+
+    }
+
+}
+
+class Desenvolvedor {
+    String nome;
+
+    public Desenvolvedor(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass().isAssignableFrom(o.getClass())) return false;
+        Desenvolvedor that = (Desenvolvedor) o;
+        return Objects.equals(nome, that.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome);
+    }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+}
+
+class DesenvolvedorJava extends Desenvolvedor{
+
+    public DesenvolvedorJava(String nome) {
+        super(nome);
+    }
+}
+----
